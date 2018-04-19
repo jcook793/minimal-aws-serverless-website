@@ -82,10 +82,10 @@ You might want to run the following to clean up:
 API Gateway requires a "stage" component to be exposed in the URL, so our Lambda is really located at `/prod/hello`. I have hidden that in the CloudFront distribution by defining an `OriginPath`:
 ```
 {
-	"Id": "api-gateway",
-	"CustomOriginConfig": {"OriginProtocolPolicy": "https-only"},
-	"DomainName": {"Fn::Join": ["", [{"Ref": "APIGatewayRestApi"}, ".execute-api.", {"Ref": "AWS::Region"}, ".amazonaws.com"]]},
-	"OriginPath": "/prod"
+    "Id": "api-gateway",
+    "CustomOriginConfig": {"OriginProtocolPolicy": "https-only"},
+    "DomainName": {"Fn::Join": ["", [{"Ref": "APIGatewayRestApi"}, ".execute-api.", {"Ref": "AWS::Region"}, ".amazonaws.com"]]},
+    "OriginPath": "/prod"
 }
 ```
 
@@ -93,15 +93,15 @@ API Gateway requires a "stage" component to be exposed in the URL, so our Lambda
 Yep, you can't GET a Lambda. I worked around this in the Integration section of the API Gateway's Method declaration:
 ```
 "Integration": {
-	"Type": "AWS",
-	"IntegrationHttpMethod": "POST",
-	"Uri": {
-		"Fn::Join": ["", [
-			"arn:aws:apigateway:", {"Ref": "AWS::Region"}, ":lambda:path/2015-03-31/functions/", {"Fn::GetAtt": ["LambdaFunction", "Arn"]}, "/invocations"
-		]]
-	},
-	"IntegrationResponses": [{"StatusCode": "200"}]
-},
+    "Type": "AWS",
+    "IntegrationHttpMethod": "POST",
+    "Uri": {
+        "Fn::Join": ["", [
+            "arn:aws:apigateway:", {"Ref": "AWS::Region"}, ":lambda:path/2015-03-31/functions/", {"Fn::GetAtt": ["LambdaFunction", "Arn"]}, "/invocations"
+        ]]
+    },
+    "IntegrationResponses": [{"StatusCode": "200"}]
+}
 ```
 
 ## The "Unnecessary" Parts

@@ -11,13 +11,13 @@ echo "Creation request submitted, waiting until it is done (this will take sever
 aws cloudformation wait stack-create-complete --stack-name ${STACK_NAME}
 exit_code=$?
 if [ ${exit_code} -ne 0 ]; then
-	# Uh-oh, we ran into a problem. Show the user a list of events to help guide them.
-	echo ""
-	aws cloudformation describe-stack-events --stack-name ${STACK_NAME} --query "StackEvents[*].{Date:Timestamp,Name:LogicalResourceId,Status:ResourceStatus,StatusText:ResourceStatusReason}" --output table
-	echo -e "\nCreation of the stack failed. See the list of events above to understand what went wrong."
-	echo -e "\nYou might want to run the following to clean up:"
-	echo "  aws cloudformation delete-stack --stack-name ${STACK_NAME}"
-	exit ${exit_code}
+    # Uh-oh, we ran into a problem. Show the user a list of events to help guide them.
+    echo ""
+    aws cloudformation describe-stack-events --stack-name ${STACK_NAME} --query "StackEvents[*].{Date:Timestamp,Name:LogicalResourceId,Status:ResourceStatus,StatusText:ResourceStatusReason}" --output table
+    echo -e "\nCreation of the stack failed. See the list of events above to understand what went wrong."
+    echo -e "\nYou might want to run the following to clean up:"
+    echo "  aws cloudformation delete-stack --stack-name ${STACK_NAME}"
+    exit ${exit_code}
 fi
 
 echo "Stack creation complete! Uploading static files to S3."
