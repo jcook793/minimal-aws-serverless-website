@@ -6,11 +6,11 @@ This is a CloudFormation template for a simple interactive website:
 - An API Gateway origin for dynamic content
 - The API Gateway proxies requests to a Lambda function
 
-<p align="center">![Diagram](readme-resources/diagram.png)</p>
+<p align="center">![Diagram](/readme-resources/diagram.png)</p>
 
 The website is a single page that makes an AJAX call to `/hello` when the "Talk to Lambda" button is pressed. The `/hello` call is routed by CloudFront to the API Gateway's `prod` stage. API Gateway routes the request to Lambda, which simply responds "Hello from Lambda". Once deployed, it looks like this:
 
-<p align="center">![Screenshot](readme-resources/website.png)</p>
+<p align="center">![Screenshot](/readme-resources/website.png)</p>
 
 ## Creating the Stack
 The included [create-stack.sh](create-stack.sh) shell script will prompt you for a stack name and do all the dirty work. Take a look at that script to understand everything going on, it's pretty straightforward.
