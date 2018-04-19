@@ -1,0 +1,36 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+	<title>Minimal Site</title>
+	<style>
+		body { font-family: Helvetica; text-align: center; }
+		div { padding: 20px; }
+		#lambda-content { font-size: 18px; color: red; }
+	</style>
+</head>
+
+<body>
+	<script>
+		function callLambda() {
+			var request = new XMLHttpRequest();
+			request.open('GET', '/hello');
+			request.onreadystatechange = function () { 
+			    if (request.readyState === 4) {
+			        document.getElementById('lambda-content').innerHTML += request.responseText + "<br>";
+			    }
+			};
+		    request.send();
+		}
+	</script>
+
+	<h1>Hello, world!</h1>
+	This HTML file originates from S3. Isn't that neat?<br>
+
+	<div>
+		<button onclick="callLambda()">Talk to Lambda</button>
+		<div id="lambda-content"></div>
+	</div>
+</body>
+
+</html>
