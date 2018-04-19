@@ -2,8 +2,6 @@
 
 read -p "Name for your CloudFormation stack: " -e STACK_NAME
 
-#STACK_Name=jcook-test
-
 echo "Submitting request to create stack ${STACK_NAME}"
 # Note the capability "CAPABILITY_IAM" is required to create the Lambda execution role
 aws cloudformation create-stack --stack-name ${STACK_NAME} --capabilities CAPABILITY_IAM --template-body file://cloudformation/template.json --output text
